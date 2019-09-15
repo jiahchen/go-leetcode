@@ -9,13 +9,19 @@ func main() {
 }
 
 func maxProfit(prices []int) int {
-	max := 0
-	for i := len(prices) - 1; i >= 0; i-- {
-		for j := 0; j < i; j++ {
-			if prices[i]-prices[j] > max {
-				max = prices[i] - prices[j]
-			}
+	if len(prices) <= 0 {
+		return 0
+	}
+	buyPoint := prices[0]
+	ans := 0
+
+	for i := 1; i < len(prices); i++ {
+		if prices[i] < buyPoint {
+			buyPoint = prices[i]
+		}
+		if prices[i]-buyPoint > ans {
+			ans = prices[i] - buyPoint
 		}
 	}
-	return max
+	return ans
 }
